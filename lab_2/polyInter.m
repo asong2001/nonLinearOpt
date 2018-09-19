@@ -1,28 +1,39 @@
 % Exercise 3 for Lab2
 % Polynomial Interpolation
 % Given set{(0,0),(2,-2),(2.8,5),(4,2),(5,-1),(6,5),(7,8)}
-clc;
-clear;
-% 设置坐标轴
-% x0=0:7;
-% y0=-50:20;
-% [X,Y]=meshgrid(x0,y0);
-
-x=[0,2,2.8,4,5,6,7];
-y=[0,-2,5,2,-1,5,8];
-plot(x,y,'o');
-grid on;
-axis([0 7 -20 50]);
-
-% 0-level
-x_axis=0:0.1:7;
-zero_level=zeros(size(x_axis));
-hold on
-plot(transpose(x_axis),zero_level);
-
-legend({'Data Points','Zero Level'});
-
-% interpolate 
-% using lagrange interpolation polynomial
-% Source :https://zhuanlan.zhihu.com/p/33690607
-x_i=0:1:7;
+% x is x matrix
+% b is the constant
+function y = polyInter(x,b)
+    A=poly(x);
+    n=length(x);
+    
+    %% plot
+    plot(x,b,'o');
+    grid on;
+    % axis([0 7 -20 50]);
+    % 0-level
+    x_axis=0:0.001:7;
+    zero_level=zeros(size(x_axis));
+    hold on
+    plot(transpose(x_axis),zero_level);
+    
+    % 多项式曲线
+    y=polyval(A,x_axis);
+    plot(x_axis,y);
+    
+    % 一阶导
+    first_order=polyder(A);
+    first_order_y=polyval(first_order,x_axis);
+    plot(x_axis,first_order_y);
+    
+    % 最大最小值
+    % 前后差分
+    ymax=diff(sign(diff(y)))==-2;
+    ymin=diff(sign(diff(y)))==2;
+    Ymax=find(ymax);
+    Ymin=find(ymin);
+    s(1)=plot(x_axis(Ymax),y(Ymax),'x','Color','red');
+    s(2)=plot(x_axis(Ymin),y(Ymin),'x','Color','green');
+    
+    legend({'Data Points','Zero Level','Interpolation Polynomial','First-Order Derivative','Local Maximun','Local Minimun'});
+end
