@@ -25,3 +25,4 @@ hold on
 face2=surf(X,Y,z(X,Y));
 xlabel('x');ylabel('y');zlabel('f(x,y)');
 set(get(gca, 'Title'), 'String', 'Tangent Plane');
+saveas(gcf,'E:\OneDrive - 南方科技大学\00-实验报告\非线性优化实验报告\lab2图\tangenPlane.jpg');

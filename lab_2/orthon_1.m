@@ -15,3 +15,5 @@ plot([0 v2(1)],[0 v2(2)],'r',[0,e2(1)],[0,e2(2)],'blue');
 legend('v2','e2','v1','e1')
 grid on
 axis([-2.5,2.5,-2.5,2.5]);
+
+saveas(gcf,'E:\OneDrive - 南方科技大学\00-实验报告\非线性优化实验报告\lab2图\othon.jpg');

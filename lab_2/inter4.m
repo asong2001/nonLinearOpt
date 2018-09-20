@@ -40,3 +40,4 @@ s(1)=plot(x_axis(Ymax),y(Ymax),'x','Color','red');
 s(2)=plot(x_axis(Ymin),y(Ymin),'x','Color','green');
 
 legend({'Data Points','Zero Level','Interpolation Polynomial','First-Order Derivative','Local Maximun','Local Minimun'});
+saveas(gcf,'E:\OneDrive - 南方科技大学\00-实验报告\非线性优化实验报告\lab2图\inter.jpg');

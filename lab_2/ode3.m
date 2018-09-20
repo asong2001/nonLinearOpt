@@ -1,3 +1,3 @@
 % ode 3
-y_diff= @(tn,yn) -y+3.*cos(3.*t).*exp(-t);
+yn2= @(tn,yn,yn1) yn1+1.5*h*;
 y_diff(1,2);
