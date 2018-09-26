@@ -8,21 +8,15 @@ close all;
 W=12;
 H=200;
 bin=zeros(H,W);
-% Éú³ÉN¸öÏä×Ó
+% ç”ŸæˆNä¸ªç®±å­
 N=10;
 w=zeros(1,N);
 h=zeros(1,N);
 for k = 1:N
-    w(k)=randi(W); % Éè¼Æ×î´ó¿í¶ÈÎªbinµÄ¿í¶È
+    w(k)=randi(W); % è®¾è®¡æœ€å¤§å®½åº¦ä¸ºbinçš„å®½åº¦
     h(k)=randi(W);
 end
 boxes=[w;h];
 
-% »æÖÆ×ø±êÖá
-figure(1);
-axis([0 W 0 H]);
-grid on;
-for k = 1:N
-    box=boxes(k);
     
 end
