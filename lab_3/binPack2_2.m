@@ -1,3 +1,5 @@
+%优化的结果还是不完善啊！！！！！
+
 % Non linear optimization Lab 3
 % Problem 2
 % 修改binPack2的算法
