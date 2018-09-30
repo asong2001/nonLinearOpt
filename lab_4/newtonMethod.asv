@@ -4,36 +4,23 @@ clc;
 clear;
 close all;
 
-% 绘制函数范围
-x0 = 5;
-xn = 0:0.01:x0;
+xn = 0:0.1:1;
 % 使用匿名函数描述函数，嵌套描述被微分的函数
 syms x;
 f = inline(x.^2,'x');
 df = inline(diff(f(x)),'x');
-
-fn=f(xn);
-plot(xn,fn);
-hold on
-plot(x0,f(x0),'o');
+x0 = 5;
 
 % 迭代初始化
 t=0;
 xi = x0;
-
-while (df(xi) >=0.001)
+while (df(xi) >=0.00001)
     xn_new=xi-f(xi)./(df(xi));
     xi=xn_new;
-    % 绘制切线图
-    k=df(xi); 
-%     tan_f=inline(k*x+b,'x');
     t=t+1;
-    
 end
 
 opt_x=xi;
 opt_y=f(opt_x);
-hold on;
-plot(opt_x,opt_y,'*');
-title({['Optimal point is (',num2str(opt_x),',',num2str(opt_y),')']});
+title({'Optimal point is ',num2s
 
