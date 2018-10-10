@@ -7,12 +7,12 @@ function delta = dm_diff(f, x)
     % f is the function fomula
     % x is the calculate value point
     x_length = length(x);
-    xn = zeros(1,x_length);
+    xn = zeros(2,x_length);
     for k = 1:1:x_length
         x_new = x;
         x_new(k) = x(k) + 10.^-6;
-        f_value = feval(f,x);
-        f_value_new = feval(f,x_new);
+        f_value = f(x(1,:),x(2,:));
+        f_value_new = f(x(1,:),x(2,:));
         delta(k) = (f_value_new(k) - f_value(k))/(10^-6);
     end
 end
