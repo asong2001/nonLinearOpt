@@ -1,7 +1,7 @@
 % Non-linear optimization Lab4
 % Descent method with Trust Region
 % Version 5 
-% This function calculate the gradient by adding 10^-9 to the input value
+% This function calculate the gradient by adding 10^-6 to the input value
 
 function delta = dm_diff(f, x)
     % f is the function fomula
@@ -13,6 +13,6 @@ function delta = dm_diff(f, x)
         x_new(k) = x(k) + 10.^-6;
         f_value = f(x(1,:),x(2,:));
         f_value_new = f(x(1,:),x(2,:));
-        delta(k) = (f_value_new(k) - f_value(k))/(10^-6);
+        delta(k) = (f_value_new - f_value)/(10^-6);
     end
 end
