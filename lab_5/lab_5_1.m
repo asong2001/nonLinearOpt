@@ -89,12 +89,6 @@ while iter <200 && step >0.0001 %&&condition
         step = step *0.5;
     end
     
-%     if old_f == z
-%         t = t+1;
-%     else
-%         old_f = z;
-%     end
-    
     if t==40
         step = step*0.5;
         t = 0;
@@ -109,4 +103,4 @@ plot(xy(1),xy(2),'*');
 hold on
 title({['Non-linear Opt Lab 5.1'],['Iteration: ',num2str(iter),'   Final Step',num2str(step)],['11612001 黄松']});
 xlabel('x');ylabel('y');
-% saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_5\plot\lab_5_1_1_v2.png');
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_5\plot\lab_5_1_1_v2.png');
