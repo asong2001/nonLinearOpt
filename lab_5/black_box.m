@@ -2,6 +2,8 @@
 % lab 6.4
 % 11612001 ª∆À…
 
+% block box
+
 function R = black_box(x)
     c = 1;
     for j = 1:length(x)

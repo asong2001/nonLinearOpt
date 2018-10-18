@@ -27,9 +27,8 @@ yt = y(t);
 plot(t,yt,'o');
 hold on
 
-data(1,:) = t;
-data(2,:) = [2.3743 1.1497 0.7317 0.5556 0.4675 0.4175 0.3807 0.3546 0.3337 0.3164];
-plot(data(1,:),data(2,:),'o');
+data = [2.3743 1.1497 0.7317 0.5556 0.4675 0.4175 0.3807 0.3546 0.3337 0.3164];
+plot(t,data,'o');
 hold on
 
 % opt
@@ -38,17 +37,14 @@ hold on
 % opt_qt = qt(m);
 % plot(t,opt_qt,'*');
 
-H0 = data(2,:);
-lb = 0;
-ub = 10;
-gt = @(x) x(1)*exp(-x(2)*t)+x(3)*exp(-x(4)*t)-y;
+H0 = data;
+lb = [0 0]';
+ub = [10 10];
+pt = @(x) x(1)*exp(-x(2)*t)+x(3)*exp(-x(4)*t);
 x0 = [1 1 1 1];
-x = lsqnonlin(gt,x0,lb,ub);
+options = optimset('lsqnonlin');
+[x,fval] = lsqnonlin(pt,x0,lb,ub,options,t,H0);
 % plot(t,opt_gt,'*');
-opt_gt = gt(x)+y;
-plot(t,y,'r');
-hold on
-plot(t,opt_gt,'b');
-hold on
+plot(t,gt(x),'r');
 
 legend('Approximization Function(initial)','Data Set','Approximization Function(Optimized)');
