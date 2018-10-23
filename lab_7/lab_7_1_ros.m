@@ -85,3 +85,9 @@ while k<kmax
 end
 ind = find(f_opt == min(f_opt));
 plot(xy(1,ind),xy(2,ind),'*');
+
+xlabel('x');ylabel('y');
+title({['Lab 7.1 Multiple-run Gradient 11612001 »ÆËÉ'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Rosenbrock Opt value:',num2str(min(f_opt))]});
+
+plot(xy(1,ind),xy(2,ind),'*','Color','Red');
+saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_1_ros.png');

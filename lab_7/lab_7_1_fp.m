@@ -12,22 +12,25 @@
 % 然后同梯度法迭代.
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++%
 
-%--------------fp(x,y)
+%--------------fp function
 
-% 但是我还没找到函数表达式
+% 梯度应该是负方向！！！
+% 可以用了
 
 clc;
 clear;
 close all;
 
 % rosebrock function n=2 还可以用这个画图呀！
-func = @(x,y) ((1-x).^2+100*((y-x.^2).^2));
+
+% norm会是什么意思呢？
+func = @(x,y) -exp(-((0.5*norm([x y])).^2)) * cos(10*x) * cos(10*y);
 xi = -2:0.1:2;
 yi = xi';
 
 % contour
 [X,Y] = meshgrid(xi,yi);
-fx_value = func(X,Y);
+fx_value = func(xi,yi);
 contour(X,Y,fx_value,150);
 hold on 
 
@@ -84,3 +87,9 @@ while k<kmax
 end
 ind = find(f_opt == min(f_opt));
 plot(xy(1,ind),xy(2,ind),'*');
+
+xlabel('x');ylabel('y');
+title({['Lab 7.1 Multiple-run Gradient 11612001 黄松'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Rosenbrock Opt value:',num2str(min(f_opt))]});
+
+plot(xy(1,ind),xy(2,ind),'*','Color','Red');
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_ros.png');

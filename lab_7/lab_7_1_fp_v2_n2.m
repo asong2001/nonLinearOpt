@@ -12,32 +12,24 @@
 % 然后同梯度法迭代.
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++%
 
-%--------------Auckley function(x,y)
+%--------------fp 函数 n=2
 
-% 但是我还没找到函数表达式
-
+% 先画图
 clc;
 clear;
 close all;
 
-% Auckley function 还可以用这个画图呀！
-
-% n = 2;
-xi = -10:0.1:10;
-yi = xi;
-n = 2;
-sum1 = 0;
-sum2 = 0;
-for i=1:length(xi)
-    sum1(i) = sum1+xi(i).^2;
-    sum2(i) = sum2+cos((2*pi)*yi(i));
-end
-fx_value = 20 + exp(1)-20*exp(-0.2*sqrt(1/n*sum1))-exp(1/n*sum2);
+% 产生函数
+% fp function n=2
+xi = -2:0.01:2;
+yi = xi';
+[X,Y] = meshgrid(xi,yi);
+func =@(x,y) -exp(-0.5*(sqrt(x.^2+y.^2)).^2) .* cos(10*x) .*cos(10*y);
 
 % contour
-[X,Y] = meshgrid(xi,yi);
-contour(X,Y,(fx_value),5);
-hold on 
+fx_value = func(xi,yi);
+contour(X,Y,fx_value,10);
+hold on;
 
 %%-------------分割线，下面的计算用syms----------------%%
 
@@ -46,12 +38,12 @@ f_opt = ones(1,20);
 f_opt = f_opt*inf;
 k = 0;
 kmax = 50;
-xy = -10 + (10+10)*rand(2,20);             % 迭代的坐标值
+xy = -2 + (2+2)*rand(2,20);             % 迭代的坐标值
 step = 0.05;
 
 syms f(x,y);
 XY = [x;y];
-f(x,y) = -20*exp(-0.2*sqrt(1/2*(x1^2 + x2^2))) - exp(1/2*(cos(2*x1)+cos(2*pi*x2))) +21;     % 计算的时候用的函数表达式
+f(x,y) = -exp(-0.5*(sqrt(x.^2+y.^2)).^2) .* cos(10*x) .*cos(10*y);     % 计算的时候用的函数表达式
 fxy_grad = gradient(f(x,y),XY);
 
 f_grad = zeros(2,20);   % 用来计算每次迭代的梯度值，经过均一化之后做方向
@@ -92,3 +84,9 @@ while k<kmax
 end
 ind = find(f_opt == min(f_opt));
 plot(xy(1,ind),xy(2,ind),'*');
+
+xlabel('x');ylabel('y');
+title({['Lab 7.1 Multiple-run Gradient 11612001 黄松'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Rosenbrock Opt value:',num2str(min(f_opt))]});
+
+plot(xy(1,ind),xy(2,ind),'*','Color','Red');
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_fp_n2.png');
