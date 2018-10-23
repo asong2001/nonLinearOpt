@@ -79,6 +79,6 @@ ind = find(f_opt == min(f_opt));
 plot(x_iter(ind),f(x_iter(ind)),'*');
 
 xlabel('x');ylabel('y');
-title({['Lab 7.1 Multiple-run Gradient 11612001 »ÆËÉ'],['Opt point:',num2str(x_iter(ind))],['Rosenbrock Opt value:',num2str(min(f_opt))]});
+title({['Lab 7.1 Multiple-run Gradient 11612001 »ÆËÉ'],['Opt point:',num2str(x_iter(ind))],['fp Opt value:',num2str(min(f_opt))]});
 
 saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_1_fp_n1.png');
