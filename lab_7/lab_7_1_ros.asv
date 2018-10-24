@@ -12,27 +12,25 @@
 % 然后同梯度法迭代.
 %+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++%
 
-% 还没有修改完成
+%--------------rosebrock
+
+% 梯度应该是负方向！！！
+% 可以用了
 
 clc;
 clear;
 close all;
 
-% Auckley function 还可以用这个画图呀！
-
-% 产生函数
-% Auckley n = 3
-xi = -10:0.01:10;
+% rosebrock function n=2 还可以用这个画图呀！
+func = @(x,y) ((1-x).^2+100*((y-x.^2).^2));
+xi = -2:0.1:2;
 yi = xi';
-[X,Y] = meshgrid(xi,yi);
-
-func = @(x,y) -20 * exp(-0.2*sqrt(0.5*(x.^2+y.^2))) - exp(0.5*(cos(2*pi*x)+cos(2*pi*y))) + 21;
 
 % contour
-fx_value = func(xi,yi);
-contour(X,Y,fx_value,30);
-hold on;
-
+[X,Y] = meshgrid(xi,yi);
+fx_value = func(X,Y);
+contour(X,Y,fx_value,150);
+hold on 
 
 %%-------------分割线，下面的计算用syms----------------%%
 
@@ -41,12 +39,12 @@ f_opt = ones(1,20);
 f_opt = f_opt*inf;
 k = 0;
 kmax = 50;
-xy = -10 + (10+10)*rand(2,20);             % 迭代的坐标值
-step = 0.8;
+xy = -2 + (2+2)*rand(2,20);             % 迭代的坐标值
+step = 0.05;
 
 syms f(x,y);
 XY = [x;y];
-f(x,y) = -20 * exp(-0.2*sqrt(0.5*(x.^2+y.^2))) - exp(0.5*(cos(2*pi*x)+cos(2*pi*y))) + 21;
+f(x,y) = ((1-x).^2+100*((y-x.^2).^2));     % 计算的时候用的函数表达式
 fxy_grad = gradient(f(x,y),XY);
 
 f_grad = zeros(2,20);   % 用来计算每次迭代的梯度值，经过均一化之后做方向
@@ -54,7 +52,6 @@ f_iter = zeros(1,20);   % 迭代产生的点的函数值
 direction = zeros(2,20);
 xy_new = zeros(2,20);
 f_new = zeros(1,20);
-step_opt = zeros(1,kmax);
 
 % 画初始点
 plot(xy(1,:),xy(2,:),'x','Color','red');
@@ -83,23 +80,19 @@ while k<kmax
             xy(:,m) = xy_new(:,m);
             f_opt(m) = f_new(m);
         end
+        
+        % 性能函数
+
     end
     plot(xy(1,:),xy(2,:),'.','Color','blue');
-    step_opt(k) = min(f_opt);
 end
+
+figure(1);
 ind = find(f_opt == min(f_opt));
 plot(xy(1,ind),xy(2,ind),'*');
 
 xlabel('x');ylabel('y');
-title({['Lab 7.1 Multiple-run Gradient 11612001 黄松'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Auckley Opt value:',num2str(min(f_opt))]});
+title({['Lab 7.1 Multiple-run Gradient 11612001 黄松'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Rosenbrock Opt value:',num2str(min(f_opt))]});
 
 plot(xy(1,ind),xy(2,ind),'*','Color','Red');
-saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_auckley_n2.png');
-
-figure(2);
-t = 1:kmax;
-plot(t,step_opt,'');
-grid on
-title({['Lab 7.1 Multiple-run Gradient Performence 11612001 黄松'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Auckley Opt value:',num2str(min(f_opt))]});
-saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_auckley_n2_performence.png');
-
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_ros.png');

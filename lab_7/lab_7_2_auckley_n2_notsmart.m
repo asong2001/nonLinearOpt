@@ -22,7 +22,7 @@ f_opt = inf;
 iter = 0;
 iter_max = 1000;
 
-fxy =@(x,y) -exp(-0.5*(sqrt(x.^2+y.^2)).^2) .* cos(10*x) .*cos(10*y);
+fxy = @(x,y) -20 * exp(-0.2*sqrt(0.5*(x.^2+y.^2))) - exp(0.5*(cos(2*pi*x)+cos(2*pi*y))) + 21;
 
 % ³õÊ¼Í¼Æ¬
 xi = -2:0.05:2;
@@ -64,12 +64,12 @@ ind = find(f_opt == min(f_opt));
 plot(xy_best(1,ind),xy_best(2,ind),'*');
 
 xlabel('x');ylabel('y');
-title({['Lab 7.2 Ramdon Search 11612001 »ÆËÉ'],['Opt point:',num2str(xy_best')],['fp Opt value:',num2str(f_opt)]});
-saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_2_fp_n2.png');
+title({['Lab 7.2 Ramdon Search 11612001 »ÆËÉ'],['Opt point:',num2str(xy_best')],['Auckley Opt value:',num2str(f_opt)]});
+saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_2_auckley_n2_notsmart.png');
 
 figure(2);
 t = 1:iter_max;
 plot(t,step_opt,'');
 grid on
-title({['Lab 7.2 Ramdon Search 11612001 »ÆËÉ'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['fp Opt value:',num2str(min(f_opt))]});
-saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_2_fp_n2_performence.png');
+title({['Lab 7.2 Ramdon Search 11612001 »ÆËÉ'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Auckley Opt value:',num2str(min(f_opt))]});
+saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_2_auckley_n2_notsmart_performence.png');

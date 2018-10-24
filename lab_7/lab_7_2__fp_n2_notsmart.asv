@@ -54,7 +54,7 @@ while iter < iter_max
     end
     t(iter) = times;
 %     pause(0.01);
-    step_opt(iter) = min(f_opt);
+    step_opt(k) = min(f_opt);
 
 end
 disp(num2str(f_opt));
@@ -65,11 +65,10 @@ plot(xy_best(1,ind),xy_best(2,ind),'*');
 
 xlabel('x');ylabel('y');
 title({['Lab 7.2 Ramdon Search 11612001 »ÆËÉ'],['Opt point:',num2str(xy_best')],['fp Opt value:',num2str(f_opt)]});
-saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_2_fp_n2.png');
 
 figure(2);
 t = 1:iter_max;
 plot(t,step_opt,'');
 grid on
-title({['Lab 7.2 Ramdon Search 11612001 »ÆËÉ'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['fp Opt value:',num2str(min(f_opt))]});
-saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_2_fp_n2_performence.png');
+title({['Lab 7.1 Multiple-run Gradient Performence 11612001 »ÆËÉ'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Auckley Opt value:',num2str(min(f_opt))]});
+saveas(gcf,'E:\7-2018Çï¼¾Ñ§ÆÚ\LAB\nonLinearOpt\lab_7\7.1plot\7_2_f_n2_performence.png');

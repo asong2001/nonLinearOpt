@@ -13,6 +13,8 @@
 
 % smart version 202-OK
 
+% fp function
+
 clc;
 clear;
 close all;
@@ -22,19 +24,19 @@ f_opt = inf;
 iter = 0;
 iter_max = 1000;
 
-fxy =@(x,y) ((1-x).^2+100*((y-x.^2).^2));     % 计算的时候用的函数表达式
+fxy = @(x,y) -20 * exp(-0.2*sqrt(0.5*(x.^2+y.^2))) - exp(0.5*(cos(2*pi*x)+cos(2*pi*y))) + 21;
 
 % 初始图片
-xi = -2:0.1:2;
+xi = -10:0.1:10;
 yi = xi';
 [X,Y] = meshgrid(xi,yi);
 fxy_value = fxy(xi,yi);             % 函数值
-contour(X,Y,fxy_value,150);
+contour(X,Y,fxy_value,50);
 hold on;
 lamda_0 = 0.5;
 lamda = lamda_0;
-xy_best = -2 + (2+2)*rand(2,20);     % 产生随机点
-xy = -2 + (2+2)*rand(2,20);     % 产生随机点
+xy_best = -10 + (10+10)*rand(2,20);     % 产生随机点
+xy = -10 + (10+10)*rand(2,20);     % 产生随机点
 plot(xy(1,:),xy(2,:),'.','Color','blue');
 
 times = 0;
@@ -62,7 +64,7 @@ while iter < iter_max
     
 
 %     pause(0.01);
-    xy = -2 + (2+2)*rand(2,20);     % 产生随机点
+    xy = -10 + (10+10)*rand(2,20);     % 产生随机点
     step_opt(iter) = min(f_opt);
     
 end
@@ -72,14 +74,14 @@ disp(num2str(times));
 p = min(find(t == times));
 
 xlabel('x');ylabel('y');
-title({['Lab 7.2 Ramdon Search Smart 11612001 黄松'],['Opt point:',num2str(xy_best')],['Rosenbrock Opt value:',num2str(f_opt)]});
+title({['Lab 7.2 Ramdon Search Smart 11612001 黄松'],['Opt point:',num2str(xy_best')],['Auckley Opt value:',num2str(f_opt)]});
 
 plot(xy_best(1),xy_best(2),'*','Color','Red');
-saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_2_ros_smart.png');
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_2_auckley_smart.png');
 
 figure(2);
 t = 1:iter_max;
 plot(t,step_opt,'');
 grid on
-title({['Lab 7.2 Smart Ramdon Search 11612001 黄松'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Rosenbrock Opt value:',num2str(min(f_opt))]});
-saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_2_ros_smart_n2_performence.png');
+title({['Lab 7.2 Smart Ramdon Search 11612001 黄松'],['Opt point:',num2str([xy_best(1),xy_best(2)])],['fp Opt value:',num2str(min(f_opt))]});
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_2_auckley_smart_n2_performence.png');

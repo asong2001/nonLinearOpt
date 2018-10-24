@@ -52,6 +52,7 @@ f_iter = zeros(1,20);   % 迭代产生的点的函数值
 direction = zeros(2,20);
 xy_new = zeros(2,20);
 f_new = zeros(1,20);
+step_opt = zeros(1,kmax);
 
 % 画初始点
 plot(xy(1,:),xy(2,:),'x','Color','red');
@@ -80,9 +81,15 @@ while k<kmax
             xy(:,m) = xy_new(:,m);
             f_opt(m) = f_new(m);
         end
+        
+        % 性能函数
+
     end
     plot(xy(1,:),xy(2,:),'.','Color','blue');
+    step_opt(k) = min(f_opt);
 end
+
+figure(1);
 ind = find(f_opt == min(f_opt));
 plot(xy(1,ind),xy(2,ind),'*');
 
@@ -91,3 +98,10 @@ title({['Lab 7.1 Multiple-run Gradient 11612001 黄松'],['Opt point:',num2str([xy
 
 plot(xy(1,ind),xy(2,ind),'*','Color','Red');
 saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_ros.png');
+
+figure(2);
+t = 1:50;
+plot(t,step_opt,'');
+grid on
+title({['Lab 7.1 Multiple-run Gradient Performence 11612001 黄松'],['Opt point:',num2str([xy(1,ind) xy(2,ind)])],['Rosenbrock Opt value:',num2str(min(f_opt))]});
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_ros_performence.png');

@@ -46,6 +46,7 @@ f_iter = zeros(1,20);   % 迭代产生的点的函数值
 direction = zeros(1,20);
 x_new = zeros(2,20);
 f_new = zeros(1,20);
+step_opt = zeros(1,kmax);
 
 % 画初始点
 plot(x_iter,real(f(x_iter)),'x');
@@ -73,6 +74,7 @@ while k < kmax
     end
     plot(x_iter,f(x_iter),'.','Color','red');
     hold on
+    step_opt(k) = min(f_opt);
 %     disp(num2str(x_iter));
 end
 ind = find(f_opt == min(f_opt));
@@ -82,3 +84,10 @@ xlabel('x');ylabel('y');
 title({['Lab 7.1 Multiple-run Gradient 11612001 黄松'],['Opt point:',num2str(x_iter(ind))],['Auckley Opt value:',num2str(min(f_opt))]});
 
 saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_auckley_n1.png');
+
+figure(2);
+t = 1:kmax;
+plot(t,step_opt,'');
+grid on
+title({['Lab 7.1 Multiple-run Gradient Performence 11612001 黄松'],['Opt point:',num2str([x_iter(ind)])],['Auckley Opt value:',num2str(min(f_opt))]});
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_auckley_n2_performence.png');

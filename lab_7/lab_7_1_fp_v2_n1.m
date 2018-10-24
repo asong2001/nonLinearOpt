@@ -46,6 +46,7 @@ f_iter = zeros(1,20);   % 迭代产生的点的函数值
 direction = zeros(1,20);
 x_new = zeros(2,20);
 f_new = zeros(1,20);
+step_opt = zeros(1,kmax);
 
 % 画初始点
 plot(x_iter,real(f(x_iter)),'x');
@@ -74,6 +75,7 @@ while k < kmax
     plot(x_iter,f(x_iter),'.','Color','red');
     hold on
 %     disp(num2str(x_iter));
+    step_opt(k) = min(f_opt);
 end
 ind = find(f_opt == min(f_opt));
 plot(x_iter(ind),f(x_iter(ind)),'*');
@@ -82,3 +84,10 @@ xlabel('x');ylabel('y');
 title({['Lab 7.1 Multiple-run Gradient 11612001 黄松'],['Opt point:',num2str(x_iter(ind))],['fp Opt value:',num2str(min(f_opt))]});
 
 saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_fp_n1.png');
+
+figure(2);
+t = 1:50;
+plot(t,step_opt,'');
+grid on
+title({['Lab 7.1 Multiple-run Gradient Performence 11612001 黄松'],['Opt point:',num2str([x_iter(1,ind)])],['fp Opt value:',num2str(min(f_opt))]});
+saveas(gcf,'E:\7-2018秋季学期\LAB\nonLinearOpt\lab_7\7.1plot\7_1_fp_n1_performence.png');
