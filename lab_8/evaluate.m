@@ -3,15 +3,15 @@
 % 8.1
 % 计算特定的函数值，同时返回最好的点和值
 
-function [F,x_best,f_best] = evaluate(func,pop,lb,ub,varargin)
+function [F,x_best,f_best] = evaluate(func,P,lb,ub,varargin)
     k0 = 1;
     f_best = inf;
-    F = zeros(1,length(pop));
+    F = zeros(1,length(P));
     
-    for k = k0:length(pop)
-        F(k) = func(pop(1,k),pop(2,k));
+    for k = k0:length(P)
+        F(k) = func(P(1,k),P(2,k));
         if F(k) < f_best
-            x_best = pop(:,k);
+            x_best = P(:,k);
             f_best = F(k);
         end
     end
