@@ -36,7 +36,7 @@ func_value = func(xi,yi);
 contour(X,Y,func_value,100);
 hold on
 plot(P(1,:),P(2,:),'x','Color','red');
-[F,x_best,f_best] = evaluate(func,P,pop_max,pop_min);     % 计算该部分的函数值
+[F,x_best,f_best] = evaluate(func,P,pop_max,pop_min,2);     % 计算该部分的函数值
 opt = zeros(1,iter_max);
 
 while iter <iter_max
@@ -45,12 +45,12 @@ while iter <iter_max
     P_new = mutation(P_new,pm);
     P = P_new;
     P(:,1) = x_best;
-    [F,x_best,f_best] = evaluate(func,P,pop_max,pop_min);
+    [F,x_best,f_best] = evaluate(func,P,pop_max,pop_min,2);
     iter = iter+1;
     
     plot(P(1,:),P(2,:),'.','Color','blue');
-    disp(num2str(x_best));
-    disp(num2str(f_best));
+%     disp(num2str(x_best));
+%     disp(num2str(f_best));
     
     opt(iter) = f_best;
 end
