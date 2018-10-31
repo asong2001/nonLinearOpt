@@ -7,15 +7,11 @@
 % exchange ramdonly
 function new_city = mutation_city(city,pm)
     N = length(city);
-    new_city = zeros(2,N);
-
-    for k = 1:N
-        c = ceil(N*rand(1,2));      % 选择要进行随机交换的对象
-        if rand() > pm
-            tmp = city(:,c(2));
-            city(:,c(2)) = city(:,c(1));
-            city(:,c(1)) = tmp;
-        end
+    c = ceil(N*rand(1,2));      % 选择要进行随机交换的对象
+    if rand() > pm
+        tmp = city(:,c(2));
+        city(:,c(2)) = city(:,c(1));
+        city(:,c(1)) = tmp;
     end
     new_city = city;
 

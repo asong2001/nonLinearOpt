@@ -8,7 +8,9 @@
 function new_city = crossover_city(city,pc)
     N = length(city);
     % 只交换一次
-    c = ceil(N*rand(1,2));      % 产生要交换的区间
+    % c = ceil(N*rand(1,2));      % 产生要交换的区间
+    c(1) = unidrnd(10);
+    c(2) = unidrnd(10);
     k = c(1);
     m = c(2);
     
