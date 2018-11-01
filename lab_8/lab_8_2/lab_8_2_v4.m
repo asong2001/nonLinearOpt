@@ -16,7 +16,7 @@ clear;
 close all;
 
 iter = 0;
-iter_max = 20000;
+iter_max = 500;
 pm = 0.01;
 pc = 0.8;
 dis_step = zeros(1,iter_max);
@@ -35,13 +35,14 @@ plot_city(city0_pos,'o');
 hold on
 line_city(1,city0_pos,'red');
 title(num2str(dis));
+pop_Size = 300;
 
 C_opt = C;
 
 while iter < iter_max
-    C_new = initial_city(9,N);           % 基于上一代产生9个个体
-    C_new(10,:) = C_opt;               % 引入上一代最优值
-    fitvalue = fitting_city(C_new,city0);      % 计算适应度
+    C_new = initial_city(pop_Size-1,N);           % 基于上一代产生9个个体
+    C_new(pop_Size,:) = C_opt;               % 引入上一代最优值
+    fitvalue = fitting_city(C_new,city0,N);      % 计算适应度
     C_tmp1 = selection_city(C_new,fitvalue);       % 选出最好的那1个
     C_tmp2 = crossover_city(C_tmp1,pc);           % 交叉互换
     C_tmp3 = mutation_city(C_tmp2,pm);
@@ -54,16 +55,6 @@ while iter < iter_max
         dis = disNew;
         C_opt = C_tmp;
     end
-    
-%     if mod(iter,200) == 0
-%         city_pos_plot = decode(C_opt,city0,N);
-%         figure(2);
-%         plot_city(city_pos_plot,'.');
-%         hold on
-%         line_city(2,city_pos_plot,'red');
-%         [~,disNew] = disCal(city_pos_plot);
-%         title(num2str(disNew));
-%     end
 
     iter = iter + 1;
     hold off
