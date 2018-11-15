@@ -8,11 +8,12 @@ clear;
 close all;
 
 %% initial 
-dim = 3;
+dim = 5;    % n
 N = 20;
 ub = 1;
 lb = 0;
 
 x = rand(dim,N);
-plotPoint(x,'red');
+figure(1);
+plotPoint(x,'r');
 u = um(x);

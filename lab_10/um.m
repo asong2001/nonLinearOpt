@@ -10,7 +10,7 @@ function E = um(x)
     for i = 1:N
         for j = (i+1):N
             % ×Ü¾àÀë
-            dis = (norm(x(:,i)-x(:,j))).^2;
+            dis = 1/(norm(x(:,i)-x(:,j)).^2);
             E = E + dis;
         end
     end
